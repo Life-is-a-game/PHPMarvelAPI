@@ -9,10 +9,6 @@
     $response = @file_get_contents($url);
     $response = @json_decode($response, true);
     $record_count = $response['data']['count'];
-
-    // var_dump($url);
-    // var_dump($record_count);
-    // var_dump($response);
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +42,7 @@
                             echo "<img src='".$item['thumbnail']['path'].".".$item['thumbnail']['extension']."' style='width:100%; height: 250px;'>";
                             echo "</a>";
                             echo "<div class='caption'>";
-                                echo "<p class='alert alert-success'><b>".$item['name']."</b></p>";
+                                echo "<p class='alert alert-success'><a href='hero.php?id=".$item['id']."'><b>".$item['name']."</b></p>";
                                 echo "<p>".$item['description']."</p>";
                             echo "</div>";
                         echo "</div>";

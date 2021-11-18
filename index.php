@@ -5,9 +5,13 @@
     $ts = $date->format("M/D/Y");
 
     $hashVal = md5($ts.$privateKey.$publicKey, false);
-    $url = 'http://gateway.marvel.com/v1/public/characters?nameStartsWith=w&limit=100&ts='.$ts.'&apikey='.$publicKey.'&hash='.$hashVal;
-    $response = @file_get_contents($url);
-    $response = @json_decode($response, true);
+    if(isset($_GET['startingWith'])){
+        $url = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=".$_GET['startingWith']."&limit=100&ts=".$ts."&apikey=".$publicKey."&hash=".$hashVal;
+    }
+    else{
+        $url = "http://gateway.marvel.com/v1/public/characters?nameStartsWith=A&limit=100&ts=".$ts."&apikey=".$publicKey."&hash=".$hashVal;
+    }
+    require('cache_page.php');
     $record_count = $response['data']['count'];
 ?>
 <!DOCTYPE html>
@@ -28,6 +32,41 @@
             <p><span class="label label-success">Results Found:</span> <?php echo $record_count; ?></p>
             <br>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Hero Search:
+                </div>
+                <div class="panel-body" style="text-align: center;">
+                    <ul class="pagination">
+                        <li><a href="index.php?startingWith=A">A</a></li>
+                        <li><a href="index.php?startingWith=B">B</a></li>
+                        <li><a href="index.php?startingWith=C">C</a></li>
+                        <li><a href="index.php?startingWith=D">D</a></li>
+                        <li><a href="index.php?startingWith=E">E</a></li>
+                        <li><a href="index.php?startingWith=F">F</a></li>
+                        <li><a href="index.php?startingWith=G">G</a></li>
+                        <li><a href="index.php?startingWith=H">H</a></li>
+                        <li><a href="index.php?startingWith=I">I</a></li>
+                        <li><a href="index.php?startingWith=J">J</a></li>
+                        <li><a href="index.php?startingWith=K">K</a></li>
+                        <li><a href="index.php?startingWith=L">L</a></li>
+                        <li><a href="index.php?startingWith=M">M</a></li>
+                        <li><a href="index.php?startingWith=N">N</a></li>
+                        <li><a href="index.php?startingWith=O">O</a></li>
+                        <li><a href="index.php?startingWith=P">P</a></li>
+                        <li><a href="index.php?startingWith=Q">Q</a></li>
+                        <li><a href="index.php?startingWith=R">R</a></li>
+                        <li><a href="index.php?startingWith=S">S</a></li>
+                        <li><a href="index.php?startingWith=T">T</a></li>
+                        <li><a href="index.php?startingWith=U">U</a></li>
+                        <li><a href="index.php?startingWith=V">V</a></li>
+                        <li><a href="index.php?startingWith=W">W</a></li>
+                        <li><a href="index.php?startingWith=X">X</a></li>
+                        <li><a href="index.php?startingWith=Y">Y</a></li>
+                        <li><a href="index.php?startingWith=Z">Z</a></li>
+                    </ul>
+                </div>
+            </div>
             <?php
                 $counter = 1;
                 $row_counter = 1;

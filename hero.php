@@ -7,8 +7,7 @@
 
     if(isset($_GET['id'])){
         $url = 'http://gateway.marvel.com/v1/public/characters/'.$_GET['id'].'?ts='.$ts.'&apikey='.$publicKey.'&hash='.$hashVal;
-        $response = @file_get_contents($url);
-        $response = @json_decode($response, true);
+        require('cache_page.php');
         $record_count = $response['data']['count'];
     }
     else{
